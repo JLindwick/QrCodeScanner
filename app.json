@@ -1,0 +1,12 @@
+{
+  "name": "qr",
+  "displayName": "qr",
+  "expo": {
+    "name": "qr",
+    "slug": "qr",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
