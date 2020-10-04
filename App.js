@@ -1,29 +1,30 @@
 'use strict';
- 
-import React, { Component } from 'react';
- 
+  
 import {
   AppRegistry,
   StyleSheet,
   Text,
   TouchableOpacity,
-  Linking
+  Linking,
+  View
 } from 'react-native';
  
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
- 
-export default class Arklign extends Component {
-  onSuccess = e => {
+
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function HomeScreen() {
+  var onSuccess = e => {
     Linking.openURL(e.data).catch(err =>
       console.error('An error occured', err)
     );
   };
- 
-  render() {
     return (
       <QRCodeScanner
-        onRead={this.onSuccess}
+        onRead={onSuccess}
         flashMode={RNCamera.Constants.FlashMode.torch}
         topContent={
           <Text style={styles.centerText}>
@@ -38,7 +39,26 @@ export default class Arklign extends Component {
       />
     );
   }
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
+  );
 }
+const Tab = createBottomTabNavigator();
+export default function App(){
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
+
  
 const styles = StyleSheet.create({
   centerText: {
@@ -60,3 +80,4 @@ const styles = StyleSheet.create({
   }
 });
  
+
